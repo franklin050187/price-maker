@@ -16,7 +16,7 @@ WORKDIR /app/price-maker
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# swith to distroless image
+# Switch to distroless image
 FROM gcr.io/distroless/python3
 
 COPY --from=build-env /app /app
@@ -25,8 +25,8 @@ ENV PYTHONPATH=/usr/local/lib/python3.11/site-packages
 
 WORKDIR /app/price-maker
 
-# Expose port 8000
+# Expose port 8501 (default Streamlit port)
 EXPOSE 8501
 
 # Command to start the server
-CMD ["streamlit", "run", "app.py"]
+ENTRYPOINT ["python", "-m", "streamlit", "run", "app.py"]
