@@ -1,5 +1,5 @@
 # Use debian:11-slim as the base image for building
-FROM python:3.9-slim AS build
+FROM python:3.11-slim AS build
 
 # Install necessary build dependencies and set up Python virtual environment
 RUN apt-get update && \
