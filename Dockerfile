@@ -1,5 +1,5 @@
 # Use official Python image as the base image
-FROM python:3.10 AS build-env
+FROM python:3.11 AS build-env
 
 # Set the working directory in the container
 WORKDIR /app
@@ -20,8 +20,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 FROM gcr.io/distroless/python3
 
 COPY --from=build-env /app /app
-COPY --from=build-env /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
-ENV PYTHONPATH=/usr/local/lib/python3.10/site-packages
+COPY --from=build-env /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+ENV PYTHONPATH=/usr/local/lib/python3.11/site-packages
 
 WORKDIR /app/price-maker
 
