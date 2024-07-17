@@ -43,5 +43,7 @@ COPY --from=builder /install /usr/local
 # Expose port 8501
 EXPOSE 8501
 
+WORKDIR /app/price-maker
+
 # Command to start the server
 CMD ["streamlit", "run", "app.py"]
