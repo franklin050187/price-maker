@@ -26,13 +26,10 @@ WORKDIR /app/price-maker
 RUN /venv/bin/pip install --disable-pip-version-check -r requirements.txt
 
 # Use the build stage as the source for the virtual environment
-FROM build AS build-venv
-
-# Copy the virtualenv into a distroless image
 FROM gcr.io/distroless/python3-debian11
 
 # Copy the virtual environment from the build stage
-COPY --from=build-venv /venv /venv
+COPY --from=build /venv /venv
 
 # Copy the application code from the build stage
 COPY --from=build /app/price-maker /app
