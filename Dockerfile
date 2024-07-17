@@ -1,5 +1,5 @@
 # Use official Python image as the base image
-FROM python:3.12 AS build-env
+FROM python:3.10 AS build-env
 
 # Set the working directory in the container
 WORKDIR /app
