@@ -23,7 +23,7 @@ COPY --from=build-env /app /app
 COPY --from=build-env /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
 ENV PYTHONPATH=/usr/local/lib/python3.10/site-packages
 
-WORKDIR /app
+WORKDIR /app/price-maker
 
 # Expose port 8000
 EXPOSE 8501
