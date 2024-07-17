@@ -40,9 +40,5 @@ WORKDIR /app
 # Expose port 8501 for Streamlit
 EXPOSE 8501
 
-# Use Python to list files in the current directory for verification
-RUN ["/venv/bin/python3", "-c", "import os; print(os.listdir('/app'))"]
-RUN ["/venv/bin/python3", "-c", "import os; print(os.listdir('/app/price-maker'))"]
-
 # Set the entrypoint to run the Streamlit app
-ENTRYPOINT ["/venv/bin/python3", "-m", "streamlit", "run", "app.py"]
+ENTRYPOINT ["/venv/bin/python3", "-m", "streamlit", "run", "/app/app.py"]
