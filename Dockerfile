@@ -25,6 +25,12 @@ WORKDIR /app/price-maker
 # Install Python dependencies from the provided requirements.txt
 RUN /venv/bin/pip install --disable-pip-version-check -r requirements.txt
 
+# Verify the virtual environment and installed packages
+RUN /venv/bin/python -m pip list
+
+# List files in the current directory for verification
+RUN ls -la /app/price-maker
+
 # Use the build stage as the source for the virtual environment
 FROM gcr.io/distroless/python3-debian11
 
@@ -39,6 +45,7 @@ WORKDIR /app
 
 # Expose port 8501 for Streamlit
 EXPOSE 8501
-
+RUN /venv/bin/python -m pip list
+RUN ls -la /app/price-maker
 # Set the entrypoint to run the Streamlit app
 ENTRYPOINT ["/venv/bin/python3", "-m", "streamlit", "run", "app.py"]
