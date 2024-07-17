@@ -1,5 +1,5 @@
 # Use official Python image as the base image
-FROM python:3.12
+FROM python:3.12 AS build-env
 
 # Set the working directory in the container
 WORKDIR /app
@@ -15,6 +15,15 @@ WORKDIR /app/price-maker
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+
+# swith to distroless image
+FROM gcr.io/distroless/python3
+
+COPY --from=build-env /app /app
+COPY --from=build-env /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
+ENV PYTHONPATH=/usr/local/lib/python3.10/site-packages
+
+WORKDIR /app
 
 # Expose port 8000
 EXPOSE 8501
