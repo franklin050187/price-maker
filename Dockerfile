@@ -1,5 +1,5 @@
 # Use official Python image as the base image
-FROM python:3.11 AS build-env
+FROM python:3.12
 
 # Set the working directory in the container
 WORKDIR /app
@@ -16,17 +16,8 @@ WORKDIR /app/price-maker
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Switch to distroless image
-FROM gcr.io/distroless/python3
-
-COPY --from=build-env /app /app
-COPY --from=build-env /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
-ENV PYTHONPATH=/usr/local/lib/python3.11/site-packages
-
-WORKDIR /app/price-maker
-
-# Expose port 8501 (default Streamlit port)
+# Expose port 8000
 EXPOSE 8501
 
 # Command to start the server
-ENTRYPOINT ["python", "-m", "streamlit", "run", "app.py"]
+CMD ["streamlit", "run", "app.py"]
