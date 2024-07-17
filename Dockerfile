@@ -35,7 +35,7 @@ COPY --from=build /venv /venv
 COPY --from=build /app/price-maker /app
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /venv
 
 # Expose port 8501 for Streamlit
 EXPOSE 8501
